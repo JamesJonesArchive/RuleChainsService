@@ -13,6 +13,8 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -30,8 +32,28 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile "joda-time:joda-time:2.2"
-    testCompile "junit:junit:4.12"
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+  // Use the latest Groovy version for building this library
+  compile 'org.codehaus.groovy:groovy-all:2.4.12'
+  compile("org.springframework.boot:spring-boot-starter-web") {
+      exclude module: "spring-boot-starter-tomcat"
+  }
+  compile("org.springframework.boot:spring-boot-starter-jetty")
+
+  compile("org.springframework.boot:spring-boot-starter-actuator")
+  compile("org.springframework.boot:spring-boot-starter-security")
+  compile("org.springframework.boot:spring-boot-starter-data-jpa") {
+    exclude module: "spring-boot-starter-tomcat"
+  }
+  compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+  compile("org.springframework.boot:spring-boot-starter-test")
+  compile("org.springframework.boot:spring-boot-starter")
+  compile "joda-time:joda-time:2.2"
+  compile("com.zaxxer:HikariCP:2.7.2")
+  // compile 'org.yaml:snakeyaml:1.17' 
+  // Snake yaml is supposed to be in spring-boot-starter
+  // runtime "com.oracle:ojdbc7:12.1.0"
+  runtime "org.mariadb.jdbc:mariadb-java-client:2.1.0"    
+
+  testCompile "junit:junit:4.12"
+  testCompile('org.springframework.boot:spring-boot-starter-test')
 }
