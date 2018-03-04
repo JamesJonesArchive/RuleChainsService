@@ -53,6 +53,8 @@ import org.springframework.transaction.annotation.Propagation
         propagation = Propagation.SUPPORTS,
         readOnly = true)
 class RuleSetService {
-	
+	@Autowired
+  private SessionFactory sessionFactory
+  
 }
 
