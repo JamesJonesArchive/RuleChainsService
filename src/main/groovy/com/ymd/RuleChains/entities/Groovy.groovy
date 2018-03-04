@@ -15,6 +15,8 @@
 package com.ymd.RuleChains.entities
 
 import javax.persistence.Entity
+import javax.persistence.OneToMany
+import javax.persistence.CascadeType
 
 /**
  *
@@ -22,6 +24,9 @@ import javax.persistence.Entity
  */
 @Entity
 class Groovy extends Rule {
-	private String rule = ""	
+	private String rule = ""
+  @OneToMany(cascade=CascadeType.ALL,mappedBy="groovy")
+  private Set<Link> links
+
 }
 

@@ -15,6 +15,8 @@
 package com.ymd.RuleChains.entities
 
 import javax.persistence.Entity
+import javax.persistence.CascadeType
+import javax.persistence.OneToMany
 
 /**
  *
@@ -32,6 +34,8 @@ class StoredProcedureQuery extends Rule {
     ]
 }
 """
+  @OneToMany(cascade=CascadeType.ALL,mappedBy="storedProcedureQuery")
+  private Set<Link> links
 
 }
 

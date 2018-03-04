@@ -22,6 +22,7 @@ import javax.persistence.FetchType
 import javax.persistence.CascadeType
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
+import javax.persistence.OneToMany
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.http.MediaType
 /**
@@ -37,5 +38,8 @@ class DefinedService extends Rule {
   @Enumerated(EnumType.STRING)
   private MediaType mediaType
   private String url = ""
+  @OneToMany(cascade=CascadeType.ALL,mappedBy="definedService")
+  private Set<Link> links
+
 }
 

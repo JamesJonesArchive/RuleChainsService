@@ -15,6 +15,8 @@
 package com.ymd.RuleChains.entities
 
 import javax.persistence.Entity
+import javax.persistence.CascadeType
+import javax.persistence.OneToMany
 
 /**
  *
@@ -23,5 +25,8 @@ import javax.persistence.Entity
 @Entity
 class SQLQuery extends Rule {
 	private String rule = ""
+  @OneToMany(cascade=CascadeType.ALL,mappedBy="sQLQuery")
+  private Set<Link> links
+
 }
 
