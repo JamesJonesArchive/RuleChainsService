@@ -15,13 +15,27 @@
 package com.ymd.RuleChains.entities
 
 import javax.persistence.Entity
+import javax.persistence.Column
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.validation.constraints.Pattern
 
 /**
  *
  * @author James Jones
  */
 @Entity
-class SQLQuery extends Rule {
-	private String rule = ""
+class RuleSet {
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private long id
+
+  @Column(nullable = false, unique=true)
+  @Pattern(regexp = "[a-zA-Z0-9]")
+  private String name
+  
+  private Set<Rule> rules
+
 }
 

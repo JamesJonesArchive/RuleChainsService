@@ -22,6 +22,6 @@ import javax.persistence.Entity
  */
 @Entity
 class Groovy extends Rule {
-	
+	private String rule = ""	
 }
 

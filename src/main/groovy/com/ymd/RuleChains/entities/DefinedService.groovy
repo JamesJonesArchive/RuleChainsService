@@ -15,13 +15,27 @@
 package com.ymd.RuleChains.entities
 
 import javax.persistence.Entity
-
+import javax.persistence.Column
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.FetchType
+import javax.persistence.CascadeType
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.http.MediaType
 /**
  *
  * @author James Jones
  */
 @Entity
-class SQLQuery extends Rule {
-	private String rule = ""
+class DefinedService extends Rule {
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+	private RequestMethod requestMethod
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private MediaType mediaType
+  private String url = ""
 }
 

@@ -30,12 +30,12 @@ class ChainJob extends QuartzJobBean {
      */
     void executeInternal(JobExecutionContext context) throws JobExecutionException {
         // execute job
-//        def chain = Chain.findByName(context.mergedJobDataMap.get('name'))
-//        def input = Chain.findByName(context.mergedJobDataMap.get('input'))
-//        //println context.mergedJobDataMap.get('name')
-//        if(!!chain) {
-//            chain.execute((!!input)?input:[[:]])
-//        }
+        def chain = Chain.findByName(context.mergedJobDataMap.get('name'))
+        def input = Chain.findByName(context.mergedJobDataMap.get('input'))
+        //println context.mergedJobDataMap.get('name')
+        if(!!chain) {
+            chain.execute((!!input)?input:[[:]])
+        }
     }
 
 }

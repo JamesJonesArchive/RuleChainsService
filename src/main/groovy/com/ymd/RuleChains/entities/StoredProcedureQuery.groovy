@@ -21,7 +21,17 @@ import javax.persistence.Entity
  * @author James Jones
  */
 @Entity
-class SQLQuery extends Rule {
-	private String rule = ""
+class StoredProcedureQuery extends Rule {
+  private String rule = ""
+  private String closure = """ 
+{-> 
+    rows = [
+        [
+            
+        ]
+    ]
+}
+"""
+
 }
 
