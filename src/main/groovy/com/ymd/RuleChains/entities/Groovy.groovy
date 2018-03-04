@@ -27,6 +27,18 @@ class Groovy extends Rule {
 	private String rule = ""
   @OneToMany(cascade=CascadeType.ALL,mappedBy="groovy")
   private Set<Link> links
+  public String getRule() {
+    return this.rule
+  }
+  public void setRule(String rule) {
+    this.rule = rule
+  }
+  public Set<Link> getLinks() {
+    return this.links
+  }
+  public void setLinks(Set<Link> links) {
+    this.links = links
+  }
 
 }
 

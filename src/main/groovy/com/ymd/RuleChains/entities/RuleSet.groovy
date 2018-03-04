@@ -19,6 +19,8 @@ import javax.persistence.Column
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.CascadeType
 import javax.validation.constraints.Pattern
 
 /**
@@ -34,8 +36,20 @@ class RuleSet {
   @Column(nullable = false, unique=true)
   @Pattern(regexp = "[a-zA-Z0-9]")
   private String name
-  
+  @OneToMany(cascade=CascadeType.ALL,mappedBy="ruleSet")
   private Set<Rule> rules
+  public long getId() {
+    return this.id
+  }
+  public void setId(long id) {
+    this.id = id
+  }
+  public String getName() {
+    return this.name
+  }
+  public void setName(String name) {
+    this.name = name
+  }
 
 }
 

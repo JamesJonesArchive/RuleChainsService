@@ -54,5 +54,59 @@ class Link {
   private Rule rule
   @ManyToOne(fetch=FetchType.LAZY)
   private Chain chain
+  public long getId() {
+    return this.id
+  }
+  public void setId(long id) {
+    this.id = id
+  }
+  public int getSequenceNumber() {
+    return this.sequenceNumber
+  }
+  public void setSequenceNumber(int sequenceNumber) {
+    this.sequenceNumber = sequenceNumber
+  }
+  public String getInputReorder() {
+    return this.inputReorder
+  }
+  public void setInputReorder(String inputReorder) {
+    this.inputReorder = inputReorder
+  }
+  public String getOutputReorder() {
+    return this.outputReorder
+  }
+  public void setOutputReorder(String outputReorder) {
+    this.outputReorder = outputReorder
+  }
+  public ExecuteEnum getExecuteEnum() {
+    return this.executeEnum
+  }
+  public void setExecuteEnum(ExecuteEnum executeEnum) {
+    this.executeEnum = executeEnum
+  }
+  public ResultEnum getResultEnum() {
+    return this.resultEnum
+  }
+  public void setResultEnum(ResultEnum resultEnum) {
+    this.resultEnum = resultEnum
+  }
+  public LinkEnum getLinkEnum() {
+    return this.linkEnum
+  }
+  public void setLinkEnum(LinkEnum linkEnum) {
+    this.linkEnum = linkEnum
+  }
+  public Rule getRule() {
+    return this.rule
+  }
+  public void setRule(Rule rule) {
+    this.rule = rule
+  }
+  public Chain getChain() {
+    return this.chain
+  }
+  public void setChain(Chain chain) {
+    this.chain = chain
+  }
 }
 

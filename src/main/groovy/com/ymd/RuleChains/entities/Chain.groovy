@@ -46,6 +46,24 @@ class Chain {
   )
   @OrderBy("sequenceNumber")
   private Set<Link> links
-    
+  
+  public long getId() {
+    return this.id
+  }
+  public void setId(long id) {
+    this.id = id
+  }
+  public String getName() {
+    return this.name
+  }
+  public void setName(String name) {
+    this.name = name
+  }
+  public Set<Link> getLinks() {
+    return this.links
+  }
+  public void setLinks(Set<Link> links) {
+    this.links = links
+  }
 }
 

@@ -47,28 +47,28 @@ abstract class Rule {
   @OneToMany(cascade=CascadeType.ALL,mappedBy="rule")
   private Set<Link> links
   
-  public getId() {
+  public long getId() {
     return this.id
   }
-  public setId(long id) {
+  public void setId(long id) {
     this.id = id
   }
-  public getName() {
+  public String getName() {
     return this.id
   }
-  public setName(String name) {
+  public void setName(String name) {
     this.name = name
   }
-  public getRuleSet() {
+  public RuleSet getRuleSet() {
     return this.ruleSet
   }
-  public setRuleSet(RuleSet ruleSet) {
+  public void setRuleSet(RuleSet ruleSet) {
     this.ruleSet = ruleSet
   }
-  public getLinks() {
+  public Set<Link> getLinks() {
     return this.links
   }
-  public setLinks(Set<Link> links) {
+  public void setLinks(Set<Link> links) {
     this.links = links
   }
 }

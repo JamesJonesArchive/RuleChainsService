@@ -27,6 +27,18 @@ class Snippet extends Rule {
 	private Chain chain
   @OneToMany(cascade=CascadeType.ALL,mappedBy="snippet")
   private Set<Link> links
+  public String getChain() {
+    return this.chain
+  }
+  public void setChain(Chain chain) {
+    this.chain = chain
+  }
+  public Set<Link> getLinks() {
+    return this.links
+  }
+  public void setLinks(Set<Link> links) {
+    this.links = links
+  }
 
 }
 

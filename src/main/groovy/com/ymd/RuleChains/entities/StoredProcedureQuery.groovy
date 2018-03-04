@@ -36,6 +36,24 @@ class StoredProcedureQuery extends Rule {
 """
   @OneToMany(cascade=CascadeType.ALL,mappedBy="storedProcedureQuery")
   private Set<Link> links
+  public String getRule() {
+    return this.rule
+  }
+  public void setRule(String rule) {
+    this.rule = rule
+  }
+  public String getClosure() {
+    return this.closure
+  }
+  public void setClosure(String closure) {
+    this.closure = closure
+  }
+  public Set<Link> getLinks() {
+    return this.links
+  }
+  public void setLinks(Set<Link> links) {
+    this.links = links
+  }
 
 }
 

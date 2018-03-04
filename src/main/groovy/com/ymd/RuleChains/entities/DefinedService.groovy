@@ -40,6 +40,29 @@ class DefinedService extends Rule {
   private String url = ""
   @OneToMany(cascade=CascadeType.ALL,mappedBy="definedService")
   private Set<Link> links
-
+  public RequestMethod getRequestMethod() {
+    return this.requestMethod
+  }
+  public void setRequestMethod(RequestMethod requestMethod) {
+    this.requestMethod = requestMethod
+  }
+  public MediaType getMediaType() {
+    return this.mediaType
+  }
+  public void setMediaType(MediaType mediaType) {
+    this.mediaType = mediaType
+  }
+  public String getUrl() {
+    return this.url
+  }
+  public void setUrl(String url) {
+    this.url = url
+  }
+  public Set<Link> getLinks() {
+    return this.links
+  }
+  public void setLinks(Set<Link> links) {
+    this.links = links
+  }
 }
 
