@@ -5,7 +5,7 @@ node('master') {
   checkout scm
 
   stage('Test Build') {
-    sh('./gradlew bootRun')
+    sh('#!/bin/sh -e ./gradlew bootRun')
   }
 
 }
