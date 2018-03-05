@@ -5,7 +5,8 @@ node('master') {
   checkout scm
 
   stage('Test Build') {
-    sh('#!/bin/sh ./gradlew bootRun')
+    sh('chmod 755 ./gradlew')
+    sh('./gradlew bootRun')
   }
 
 }
