@@ -24,7 +24,8 @@ import javax.persistence.EnumType
 import javax.persistence.Enumerated
 import javax.persistence.OneToMany
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.http.MediaType
+
+import com.ymd.RuleChains.enums.ParseEnum
 /**
  *
  * @author James Jones
@@ -36,7 +37,7 @@ class DefinedService extends Rule {
 	private RequestMethod requestMethod
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
-  private MediaType mediaType
+  private ParseEnum parseEnum
   private String url = ""
   @OneToMany(cascade=CascadeType.ALL,mappedBy="definedService")
   private Set<Link> links
@@ -46,11 +47,11 @@ class DefinedService extends Rule {
   public void setRequestMethod(RequestMethod requestMethod) {
     this.requestMethod = requestMethod
   }
-  public MediaType getMediaType() {
-    return this.mediaType
+  public ParseEnum getParseEnum() {
+    return this.parseEnum
   }
-  public void setMediaType(MediaType mediaType) {
-    this.mediaType = mediaType
+  public void setParseEnum(ParseEnum parseEnum) {
+    this.parseEnum = parseEnum
   }
   public String getUrl() {
     return this.url
