@@ -4,9 +4,7 @@ node('master') {
   env.PATH = "${env.JENKINS_HOME}/bin:${env.PATH}"
   checkout scm
 
-  stage('Test Build') {
-    sh('chmod 755 ./gradlew')
-    sh('./gradlew bootRun')
+  stage('Build RuleChains Service') {
+    sh('#!/bin/sh -e\n' + "ansible-playbook -i 'localhost,' -c local --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=all java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER}' -t build")
   }
-
 }

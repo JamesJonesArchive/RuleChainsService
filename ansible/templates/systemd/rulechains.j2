@@ -1,0 +1,3 @@
+SERVER_PORT={{ rulechains[(deploy_env | lower)].port }}
+SPRING_CONFIG_NAME=rulechains-config
+SPRING_CONFIG_LOCATION=file://{{ rulechains[(deploy_env | lower)].config_location }}

@@ -1,0 +1,16 @@
+[Unit]
+Description=RuleChains Service
+Documentation=https://github.com/jamjon3/RuleChainsService
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/rulechains
+Environment=JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom
+ExecStart=/usr/local/lib/rulechains/jdk8/jre/bin/java -Dgrails.env=prod -jar /usr/local/lib/rulechains/RuleChains.jar
+Restart=on-failure
+RestartSec=2s
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
