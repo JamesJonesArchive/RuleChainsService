@@ -7,5 +7,5 @@
     - name: Build RuleChainsService
       include_tasks: build.yml
       tags:
-        - deploy
+        - build
 
