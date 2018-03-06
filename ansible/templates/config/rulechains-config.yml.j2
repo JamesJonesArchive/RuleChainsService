@@ -1,7 +1,7 @@
 ---
 spring:
   jpa:
-    database: MYSQL
+    database: rulechains[deploy_env].database.jpa.database
     hibernate:
       ddl-auto: validate
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
@@ -10,9 +10,9 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: "jdbc:mariadb://{{ personregistryDB.pr.host }}:{{ personregistryDB.pr.port }}/{{ personregistryDB.pr.db }}"
-    username: "{{ personregistryDB.pr.user }}"
-    password: "{{ personregistryDB.pr.password }}"
+    url: "{{ rulechains[deploy_env].database.url }}"
+    username: "{{ rulechains[deploy_env].database.user }}"
+    password: "{{ rulechains[deploy_env].database.password }}"
     driver-class-name: org.mariadb.jdbc.Driver
     hikari:
       connectionTimeout: 60000
@@ -59,7 +59,3 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file: /var/log/person-registry-ws/person-registry-ws.log
-sourceIdentifiers:
-  sources:
-    105:
-      - 43

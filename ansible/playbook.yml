@@ -2,6 +2,7 @@
 - hosts: "{{ target_hosts }}"
   vars_files:
     - ./vars/main.yml
+    - ./vars/vault.yml
   tasks:
     - name: Build RuleChainsService
       include_tasks: build.yml

@@ -1,3 +1,3 @@
-SERVER_PORT={{ rulechains[(deploy_env | lower)].port }}
-SPRING_CONFIG_NAME=rulechains-config
-SPRING_CONFIG_LOCATION=file://{{ rulechains[(deploy_env | lower)].config_location }}
+SERVER_PORT={{ rulechains[deploy_env].config.port }}
+SPRING_CONFIG_NAME={{ rulechains[deploy_env].config.name }}
+SPRING_CONFIG_LOCATION={{ rulechains[deploy_env].config.location }}
