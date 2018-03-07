@@ -11,7 +11,7 @@
     chdir: "../"
   with_items: 
     - "./gradlew clean"
-    - "./grailsw build"
+    - "./gradlew build"
 - name: Extract the JCE into Java
   command: "unzip -j -o {{ playbook_dir }}/files/jce/jce_policy-8.zip -d {{ java_home }}/jre/lib/security"
 - name: create RuleChainsService log folder
