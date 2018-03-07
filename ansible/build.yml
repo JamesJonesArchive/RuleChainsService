@@ -1,6 +1,9 @@
 ---
 - name: Ensure the fpm gem installed
   command: gem install fpm
+- file:
+    path: ../gradlew
+    mode: 0755
 - name: Build RuleChainsService
   shell: "{{ item }}"
   become: no
@@ -12,9 +15,10 @@
 - name: Extract the JCE into Java
   command: "unzip -j -o {{ playbook_dir }}/files/jce/jce_policy-8.zip -d {{ java_home }}/jre/lib/security"
 - name: create RuleChainsService log folder
-  file: path=/tmp/rulechains
-        state=directory
-        mode=0755
+  file: 
+    path: /tmp/rulechains
+    state: directory
+    mode: 0755
   with_items:
     - absent
     - directory
