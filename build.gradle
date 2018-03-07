@@ -18,11 +18,6 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-ext {
-  appBaseName = project.appBaseName
-  appVersion = project.appVersion
-}
-
 jar {
   baseName = "${appBaseName}"
   version = "${appVersion}"
