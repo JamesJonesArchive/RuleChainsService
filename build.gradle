@@ -24,8 +24,8 @@ ext {
 }
 
 jar {
-  baseName = appBaseName
-  version = appVersion
+  baseName = "${appBaseName}"
+  version = "${appVersion}"
 }
 
 repositories {
