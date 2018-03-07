@@ -4,6 +4,9 @@
 - file:
     path: ../gradlew
     mode: 0755
+- file:
+    path: ../build
+    state: absent
 - name: Build RuleChainsService
   shell: "{{ item }}"
   become: no
@@ -17,7 +20,7 @@
 - name: create RuleChainsService log folder
   file: 
     path: /tmp/rulechains
-    state: directory
+    state: "{{ item }}"
     mode: 0755
   with_items:
     - absent
