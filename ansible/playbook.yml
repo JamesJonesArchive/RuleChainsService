@@ -3,6 +3,9 @@
   vars_files:
     - ./vars/main.yml
     - ./vars/vault.yml
+  vars:
+    app_name: "{{ lookup('ini', 'appBaseName type=properties file=../gradle.properties') }}"
+    app_version: "{{ lookup('ini', 'appVersion type=properties file=../gradle.properties') }}"
   tasks:
     - name: Build RuleChainsService
       include_tasks: build.yml
