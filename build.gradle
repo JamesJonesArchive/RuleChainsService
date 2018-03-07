@@ -19,8 +19,10 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 jar {
-  baseName = "${project.name}"
-  version = "${project.version}"
+  // baseName = "${project.name}"
+  // version = "${project.version}"
+  baseName = "RuleChains"
+  version = "2.0.0"
 }
 
 repositories {
