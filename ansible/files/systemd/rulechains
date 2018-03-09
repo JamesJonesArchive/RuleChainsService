@@ -1,4 +1,4 @@
 SERVER_PORT=9001
 SPRING_CONFIG_NAME=rulechains-config
-SPRING_CONFIG_LOCATION=file:/usr/local/etc/rulechains/
+SPRING_CONFIG_LOCATION=file:///usr/local/etc/rulechains/
 
