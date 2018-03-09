@@ -1,2 +1,7 @@
 ---
-
+rulechainsrepo:
+  name: bintraybintray-jamjon3-rpm
+  baseurl: https://dl.bintray.com/jamjon3/rpm
+  gpgcheck: no
+  repo_gpgcheck: no
+  enabled: yes

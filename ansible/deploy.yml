@@ -1,0 +1,20 @@
+---
+- name: install jdk 8
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
+- name: Add Rundeck Repo
+  yum_repository:
+    name: "{{ rulechainsrepo.name }}"
+    description: "{{ rulechainsrepo.name }}"
+    baseurl: "{{ rulechainsrepo.baseurl }}"
+    gpgcheck: "{{ rulechainsrepo.gpgcheck }}"
+    repo_gpgcheck: "{{ rulechainsrepo.repo_gpgcheck }}"
+    enabled: "{{ rulechainsrepo.enabled }}"
+- name: install the latest version of rundeck
+  package:
+    name: RuleChains
+    state: latest

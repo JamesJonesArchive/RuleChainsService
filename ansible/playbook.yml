@@ -16,4 +16,9 @@
       when: "deploy_env == 'Development'"
       tags:
         - publish
+    - name: Deploy RuleChainsService
+      include_tasks: deploy.yml
+      when: "deploy_env == 'Development'"
+      tags:
+        - deploy
 
