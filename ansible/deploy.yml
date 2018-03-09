@@ -20,6 +20,6 @@
     state: latest
 - name: Add config template
   template:
-    src: "{{ playbook_dir }}/../templates/config/rulechains-config.yml.j2"
+    src: "{{ playbook_dir }}/templates/config/rulechains-config.yml.j2"
     dest: /usr/local/etc/rulechains/rulechains-config.yml
     mode: 0644
