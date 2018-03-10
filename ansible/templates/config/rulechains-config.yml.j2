@@ -1,7 +1,7 @@
 ---
 spring:
   jpa:
-    database: rulechains[deploy_env].database.jpa.database
+    database: {{ rulechains[deploy_env].database.jpa.database }}
     hibernate:
       ddl-auto: validate
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
@@ -10,7 +10,7 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: {{ rulechains[deploy_env].database.url }}
+    url: "{{ rulechains[deploy_env].database.url }}"
     username: {{ rulechains[deploy_env].database.user }}
     password: {{ rulechains[deploy_env].database.password }}
     driver-class-name: org.mariadb.jdbc.Driver
