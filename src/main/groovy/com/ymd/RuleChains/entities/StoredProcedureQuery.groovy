@@ -34,7 +34,10 @@ class StoredProcedureQuery extends Rule {
     ]
 }
 """
-  @OneToMany(cascade=CascadeType.ALL,mappedBy="storedProcedureQuery")
+  @OneToMany(
+    cascade=CascadeType.ALL
+//    mappedBy="storedProcedureQuery"
+  )
   private Set<Link> links
   public String getRule() {
     return this.rule

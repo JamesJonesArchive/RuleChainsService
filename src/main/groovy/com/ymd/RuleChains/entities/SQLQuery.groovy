@@ -25,7 +25,10 @@ import javax.persistence.OneToMany
 @Entity
 class SQLQuery extends Rule {
 	private String rule = ""
-  @OneToMany(cascade=CascadeType.ALL,mappedBy="sQLQuery")
+  @OneToMany(
+//    mappedBy="sQLQuery"
+    cascade=CascadeType.ALL
+  )
   private Set<Link> links
   public String getRule() {
     return this.rule

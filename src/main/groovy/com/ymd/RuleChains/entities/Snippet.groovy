@@ -25,7 +25,10 @@ import javax.persistence.OneToMany
 @Entity
 class Snippet extends Rule {
 	private Chain chain
-  @OneToMany(cascade=CascadeType.ALL,mappedBy="snippet")
+  @OneToMany(
+    cascade=CascadeType.ALL
+//    mappedBy="snippet"
+  )
   private Set<Link> links
   public String getChain() {
     return this.chain

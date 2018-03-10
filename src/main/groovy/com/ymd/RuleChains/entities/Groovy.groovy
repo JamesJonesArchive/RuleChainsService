@@ -25,7 +25,10 @@ import javax.persistence.CascadeType
 @Entity
 class Groovy extends Rule {
 	private String rule = ""
-  @OneToMany(cascade=CascadeType.ALL,mappedBy="groovy")
+  @OneToMany(
+    // mappedBy="groovy"
+    cascade=CascadeType.ALL
+  )
   private Set<Link> links
   public String getRule() {
     return this.rule

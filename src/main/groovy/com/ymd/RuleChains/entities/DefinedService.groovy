@@ -39,7 +39,10 @@ class DefinedService extends Rule {
   @Enumerated(EnumType.STRING)
   private ParseEnum parseEnum
   private String url = ""
-  @OneToMany(cascade=CascadeType.ALL,mappedBy="definedService")
+  @OneToMany(
+    // mappedBy="definedService",
+    cascade=CascadeType.ALL
+  )
   private Set<Link> links
   public RequestMethod getRequestMethod() {
     return this.requestMethod
