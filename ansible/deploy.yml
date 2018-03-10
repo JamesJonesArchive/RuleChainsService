@@ -6,7 +6,7 @@
   with_items:
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
-- name: Add Rundeck Repo
+- name: Add RuleChains Repo
   yum_repository:
     name: "{{ rulechainsrepo.name }}"
     description: "{{ rulechainsrepo.name }}"
