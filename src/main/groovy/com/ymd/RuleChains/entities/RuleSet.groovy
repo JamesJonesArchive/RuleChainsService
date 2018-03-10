@@ -36,7 +36,10 @@ class RuleSet {
   @Column(nullable = false, unique=true)
   @Pattern(regexp = "[a-zA-Z0-9]")
   private String name
-  @OneToMany(cascade=CascadeType.ALL,mappedBy="ruleSet")
+  @OneToMany(
+    // mappedBy="ruleSet",
+    cascade=CascadeType.ALL
+  )
   private Set<Rule> rules
   public long getId() {
     return this.id

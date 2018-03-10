@@ -40,7 +40,7 @@ class Chain {
   private String name
   
   @OneToMany(
-    mappedBy = "chain", 
+    // mappedBy = "chain", 
     fetch = FetchType.LAZY,
     cascade = CascadeType.ALL
   )
