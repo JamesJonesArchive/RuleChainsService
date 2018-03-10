@@ -14,6 +14,7 @@
     gpgcheck: "{{ rulechainsrepo.gpgcheck }}"
     repo_gpgcheck: "{{ rulechainsrepo.repo_gpgcheck }}"
     enabled: "{{ rulechainsrepo.enabled }}"
+    metadata_expire: 1200
 - name: install the latest version of RuleChains
   package:
     name: RuleChains
