@@ -14,10 +14,14 @@
     gpgcheck: "{{ rulechainsrepo.gpgcheck }}"
     repo_gpgcheck: "{{ rulechainsrepo.repo_gpgcheck }}"
     enabled: "{{ rulechainsrepo.enabled }}"
-- name: install the latest version of rundeck
+- name: install the latest version of RuleChains
   package:
     name: RuleChains
     state: latest
+- name: install the latest updates
+  package:
+    name: *
+    state: latest    
 - name: Add config template
   template:
     src: "{{ playbook_dir }}/templates/config/rulechains-config.yml.j2"

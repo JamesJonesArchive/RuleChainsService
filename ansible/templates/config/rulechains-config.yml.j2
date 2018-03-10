@@ -10,9 +10,9 @@ spring:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: "{{ rulechains[deploy_env].database.url }}"
-    username: "{{ rulechains[deploy_env].database.user }}"
-    password: "{{ rulechains[deploy_env].database.password }}"
+    url: {{ rulechains[deploy_env].database.url }}
+    username: {{ rulechains[deploy_env].database.user }}
+    password: {{ rulechains[deploy_env].database.password }}
     driver-class-name: org.mariadb.jdbc.Driver
     hikari:
       connectionTimeout: 60000
@@ -58,4 +58,4 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-  file: /var/log/person-registry-ws/person-registry-ws.log
+  file: /var/log/rulechains/rulechains.log
