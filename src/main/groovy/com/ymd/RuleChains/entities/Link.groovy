@@ -23,6 +23,7 @@ import javax.persistence.FetchType
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
 import javax.persistence.ManyToOne
+import javax.persistence.JoinColumn
 
 import com.ymd.RuleChains.enums.ExecuteEnum
 import com.ymd.RuleChains.enums.ResultEnum
@@ -33,9 +34,9 @@ import com.ymd.RuleChains.enums.LinkEnum
  */
 @Entity
 class Link {
-	@Id
+  @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private long id
+  private Long id
   
   @Column(nullable = false)
   private int sequenceNumber
@@ -53,11 +54,12 @@ class Link {
   @ManyToOne(fetch=FetchType.LAZY)
   private Rule rule
   @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn(name="chain_id")
   private Chain chain
-  public long getId() {
+  public Long getId() {
     return this.id
   }
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id
   }
   public int getSequenceNumber() {

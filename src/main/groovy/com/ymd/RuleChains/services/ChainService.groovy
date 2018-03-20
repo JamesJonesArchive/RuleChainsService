@@ -15,6 +15,7 @@
 
 package com.ymd.RuleChains.services
 
+import com.ymd.RuleChains.entities.Chain
 import java.util.stream.Collectors
 import java.text.SimpleDateFormat
 import java.text.DateFormat
@@ -48,13 +49,9 @@ import org.springframework.transaction.annotation.Propagation
  *
  * @author james
  */
-@Service
-@Transactional(
-        propagation = Propagation.SUPPORTS,
-        readOnly = true)
-class ChainService {
-	@Autowired
-  private SessionFactory sessionFactory
-  
+
+interface ChainService {
+  List<Chain> listChains(String pattern)
+  Chain getChainByName(String name)
 }
 

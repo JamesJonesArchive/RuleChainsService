@@ -43,12 +43,16 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult
 import org.springframework.transaction.support.TransactionTemplate
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.annotation.Propagation
+import com.ymd.RuleChains.repositories.RuleSetRepository
 
 /**
  *
  * @author james
  */
-interface ChainServiceHandlerService {
+@Service
+class RuleSetServiceImpl implements RuleSetService {
+  @Autowired
+  private RuleSetRepository ruleSetRepository
   
 }
 

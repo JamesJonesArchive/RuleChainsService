@@ -6,11 +6,14 @@
 
 package com.ymd.RuleChains.services
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 /**
  *
  * @author jam
  */
-interface LinkService {
+@Service
+class ChainServiceHandlerServiceImpl implements ChainServiceHandlerService {
 	
 }
 

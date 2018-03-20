@@ -48,13 +48,7 @@ import org.springframework.transaction.annotation.Propagation
  *
  * @author james
  */
-@Service
-@Transactional(
-        propagation = Propagation.SUPPORTS,
-        readOnly = true)
-class ConfigService {
-	@Autowired
-  private SessionFactory sessionFactory
+interface ConfigService {
   
 }
 

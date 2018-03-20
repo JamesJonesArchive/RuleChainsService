@@ -47,9 +47,9 @@ dependencies {
   // https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/boot-features-quartz.html
   compile("org.springframework.boot:spring-boot-starter-quartz")
   compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-  compile("org.springframework.boot:spring-boot-starter-test")
   compile("org.springframework.boot:spring-boot-starter")
-  
+
+  compile("org.springframework:springloaded:1.2.6.RELEASE")  
   // compile "joda-time:joda-time:2.2"
   // compile("com.zaxxer:HikariCP:2.7.2")
   // compile 'org.yaml:snakeyaml:1.17' 
@@ -57,6 +57,7 @@ dependencies {
   // runtime "com.oracle:ojdbc7:12.1.0"
   runtime "org.mariadb.jdbc:mariadb-java-client:2.1.0"    
 
-  testCompile "junit:junit:4.12"
-  testCompile('org.springframework.boot:spring-boot-starter-test')
+  compile("com.h2database:h2")
+  testCompile("junit:junit")
+  testCompile("org.springframework.boot:spring-boot-starter-test")
 }

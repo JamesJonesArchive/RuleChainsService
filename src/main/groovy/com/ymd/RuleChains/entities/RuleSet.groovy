@@ -31,7 +31,7 @@ import javax.validation.constraints.Pattern
 class RuleSet {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private long id
+  private Long id
 
   @Column(nullable = false, unique=true)
   @Pattern(regexp = "[a-zA-Z0-9]")
@@ -41,10 +41,10 @@ class RuleSet {
     cascade=CascadeType.ALL
   )
   private Set<Rule> rules
-  public long getId() {
+  public Long getId() {
     return this.id
   }
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id
   }
   public String getName() {

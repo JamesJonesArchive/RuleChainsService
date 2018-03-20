@@ -48,7 +48,8 @@ import org.springframework.transaction.annotation.Propagation
  *
  * @author james
  */
-interface ChainServiceHandlerService {
+@Service
+class UserInfoHandlerServiceImpl implements UserInfoHandlerService {
   
 }
 

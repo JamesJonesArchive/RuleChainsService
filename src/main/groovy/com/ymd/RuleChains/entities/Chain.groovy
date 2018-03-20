@@ -30,27 +30,33 @@ import javax.validation.constraints.Pattern
  * @author James Jones
  */
 @Entity
-class Chain {
-	@Id
+class Chain implements Serializable {
+  private static final long serialVersionUID = 2L
+  
+  @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private long id
+  private Long id
 
   @Column(nullable = false, unique=true)
-  @Pattern(regexp = "[a-zA-Z0-9]")
+  @Pattern(regexp = "^[A-Za-z0-9]+\$")
   private String name
   
   @OneToMany(
-    // mappedBy = "chain", 
+    mappedBy = "chain", 
     fetch = FetchType.LAZY,
     cascade = CascadeType.ALL
   )
   @OrderBy("sequenceNumber")
   private Set<Link> links
   
-  public long getId() {
+  public Chain() {}
+  public Chain(String name) {
+    this.name = name
+  }
+  public Long getId() {
     return this.id
   }
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id
   }
   public String getName() {
