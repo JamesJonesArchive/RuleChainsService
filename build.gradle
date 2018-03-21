@@ -49,7 +49,6 @@ dependencies {
   compile("org.springframework.boot:spring-boot-starter-thymeleaf")
   compile("org.springframework.boot:spring-boot-starter")
 
-  compile("org.springframework:springloaded:1.2.6.RELEASE")  
   // compile "joda-time:joda-time:2.2"
   // compile("com.zaxxer:HikariCP:2.7.2")
   // compile 'org.yaml:snakeyaml:1.17' 

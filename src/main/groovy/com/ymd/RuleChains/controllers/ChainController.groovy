@@ -65,13 +65,13 @@ class ChainController {
     return chainService.getChainByName(name)
   }
   @RequestMapping(
-    value = "/",
+    value = "",
     method = RequestMethod.GET,
     // consumes = {"application/json", "application/xml"},
     produces = MediaType.APPLICATION_JSON_VALUE
   )
   @ResponseStatus(HttpStatus.OK)
-  public @ResponseBody Chain listChains(@RequestParam Map<String, String> queryParameters,
+  public @ResponseBody List<Chain> listChains(@RequestParam Map<String, String> queryParameters,
       HttpServletRequest request, HttpServletResponse response) throws Exception {
     if(queryParameters.containsKey("pattern")) {
       return chainService.listChains(queryParameters.get("pattern"))

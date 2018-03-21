@@ -52,7 +52,10 @@ spring:
       testWhileIdle: true
       testOnReturn: false
       jdbcInterceptors: "ConnectionState;StatementCache(max=200)"
-
+security:
+  ignored: /**
+  basic:
+    enabled: false
 ###
 #   H2 Settings
 ###

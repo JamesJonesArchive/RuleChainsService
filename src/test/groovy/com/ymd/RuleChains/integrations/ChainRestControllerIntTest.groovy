@@ -16,34 +16,40 @@
 package com.ymd.RuleChains.integrations
 
 import com.ymd.RuleChains.Application
+import com.ymd.RuleChains.entities.Chain
 import com.ymd.RuleChains.repositories.ChainRepository
 import java.net.URL
 import org.junit.Before
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.http.ResponseEntity
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
+import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.web.servlet.MockMvc
 
+import static org.hamcrest.CoreMatchers.*
 import static org.hamcrest.Matchers.*
 import static org.junit.Assert.*
-
+import static org.mockito.Mockito.*
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 /**
  *
  * @author James Jones <jamjon3@gmail.com>
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(
-  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+  webEnvironment = WebEnvironment.RANDOM_PORT,
   classes = Application.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
-//@TestPropertySource(
-//  locations = "classpath:application-integrationtest.properties")
-class ChainControllerIT {
+//@TestPropertySource(locations = "classpath:application-integrationtest.properties")
+class ChainRestControllerIntTest {
 
   @Autowired
   private MockMvc mvc
@@ -60,16 +66,23 @@ class ChainControllerIT {
     repository.deleteAll()
   }
   @Test
-  public void getChain() throws Exception {
-    ResponseEntity<String> response = template.getForEntity(base.toString(),
-      String.class);
-    assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+  public void whenChain_thenGetChain() throws IOException, Exception {
+    createTestChain("testGetChain")
+    mvc.perform(get("/api/chain/testGetChain")
+      .contentType(MediaType.APPLICATION_JSON))
+      .andDo(print())
+      .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+      .andExpect(jsonPath("\$.name", is("testGetChain")))
   }
   @Test
-  public void listChains() throws Exception {
-    ResponseEntity<String> response = template.getForEntity(base.toString(),
-      String.class);
-    assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+  public void whenChains_thenListChains() throws IOException, Exception {
+    createTestChain("testListChains")
+    mvc.perform(get("/api/chain/testGetChain")
+      .contentType(MediaType.APPLICATION_JSON))
+      .andDo(print())
+      .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+      .andExpect(jsonPath('$', hasSize(greaterThanOrEqualTo(2))))
+      .andExpect(jsonPath('$[@name == "testGetChain"]').exists())
   }
   private void createTestChain(String name) {
     Chain chain = new Chain(name)

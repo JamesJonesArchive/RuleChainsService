@@ -9,6 +9,7 @@ package com.ymd.RuleChains.controllers
 import com.ymd.RuleChains.entities.Chain
 import com.ymd.RuleChains.services.ChainService
 import org.junit.Before
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.test.web.servlet.request.RequestPostProcessor
 
-import static org.hamcrest.Matchers.equalTo
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-
+import static org.hamcrest.CoreMatchers.*
+import static org.hamcrest.Matchers.*
+import static org.junit.Assert.*
+import static org.mockito.Mockito.*
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 /**
  *
  * @author jam
@@ -42,9 +45,9 @@ class ChainControllerTest {
   public void setUp() {
     Chain alex = new Chain("alex");
 
-    Mockito.when(chainService.getChainByName(alex.getName()))
+    when(chainService.getChainByName(alex.getName()))
       .thenReturn(alex);
-    Mockito.when(chainService.listChains())
+    when(chainService.listChains())
       .thenReturn([ alex ]);
   }
 
@@ -57,13 +60,14 @@ class ChainControllerTest {
       .andExpect(status().isOk())
       .andExpect(content()
         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE))
-      .andExpect(jsonPath("\$.name", is("alex")));
+      .andExpect(jsonPath('$.name', is("alex")));
 
   }
   @Test
   public void listChains() throws Exception {
     
     mvc.perform(MockMvcRequestBuilders.get("/api/chain")
+      // .with(ssuser())
       .accept(MediaType.APPLICATION_JSON)
       .contentType(MediaType.APPLICATION_JSON))
       .andExpect(status().isOk())
@@ -73,6 +77,8 @@ class ChainControllerTest {
       .andExpect(jsonPath("\$[0].name", is("alex")));
 
   }
-
+//  public static RequestPostProcessor ssuser() {
+//    return user("user").roles("ADMIN");
+//  }
 }
 
