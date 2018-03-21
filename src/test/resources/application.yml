@@ -55,8 +55,8 @@ spring:
 security:
   ignored: /**
   basic:
-    enabled: true
-  enable-csrf: true
+    enabled: false
+  enable-csrf: false
 ###
 #   H2 Settings
 ###
