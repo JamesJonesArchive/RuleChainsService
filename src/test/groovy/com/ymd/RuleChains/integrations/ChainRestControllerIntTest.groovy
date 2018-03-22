@@ -70,19 +70,21 @@ class ChainRestControllerIntTest {
     createTestChain("testGetChain")
     mvc.perform(get("/api/chain/testGetChain")
       .contentType(MediaType.APPLICATION_JSON))
-      .andDo(print())
+      // .andDo(print())
       .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
       .andExpect(jsonPath("\$.name", is("testGetChain")))
   }
   @Test
   public void whenChains_thenListChains() throws IOException, Exception {
     createTestChain("testListChains")
-    mvc.perform(get("/api/chain/testGetChain")
+    createTestChain("testListChains2")
+    mvc.perform(get("/api/chain")
       .contentType(MediaType.APPLICATION_JSON))
-      .andDo(print())
+      // .andDo(print())
       .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
       .andExpect(jsonPath('$', hasSize(greaterThanOrEqualTo(2))))
-      .andExpect(jsonPath('$[@name == "testGetChain"]').exists())
+      // .andExpect(jsonPath('$[?(@.name == "testGetChain")]', hasSize(1)))
+      // .andExpect(jsonPath('$[?(@.name == "testGetChain")].name').exists())      
   }
   private void createTestChain(String name) {
     Chain chain = new Chain(name)
