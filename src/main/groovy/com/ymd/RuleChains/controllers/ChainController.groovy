@@ -61,8 +61,12 @@ class ChainController {
       HttpServletRequest request, HttpServletResponse response) throws Exception {
     // Chain chain = chainRepository.findByName(name);
     // return chainRepository.findByName(name);
-    // Chain chain = chainService.getChainByName(name)
-    return chainService.getChainByName(name)
+    Chain chain = chainService.getChainByName(name)
+    if(!chain) {
+      response.setStatus(HttpServletResponse.SC_NOT_FOUND)
+      // or response.setStatus(404)
+    }
+    return chain
   }
   @RequestMapping(
     value = "",
