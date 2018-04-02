@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "docker" do |d|
   # config.vm.provision "docker" do |d|
     d.name = "rulechainsservice"
-    d.ports = ['22:2201','80:8001', '3000:3001']
+    d.ports = ['2201:22','8001:80', '3001:3000']
     # d.build_dir = "."
   end
 end
