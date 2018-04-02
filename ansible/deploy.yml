@@ -6,6 +6,16 @@
   with_items:
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  tags:
+    - deploy
+- name: install jdk 8
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - openjdk-8-jdk
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags:
     - deploy
 - name: Add RuleChains Repo
@@ -17,12 +27,14 @@
     repo_gpgcheck: "{{ rulechainsrepo.repo_gpgcheck }}"
     enabled: "{{ rulechainsrepo.enabled }}"
     metadata_expire: 1200
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   tags:
     - deploy
 - name: install the latest version of RuleChains
   package:
     name: RuleChains
     state: latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   tags:
     - deploy
 - name: install the latest updates

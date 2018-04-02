@@ -6,3 +6,4 @@ bin/
 build/
 /.nb-gradle/
 /.vagrant/
+/ansible/playbook.retry

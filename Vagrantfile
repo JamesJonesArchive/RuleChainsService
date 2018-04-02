@@ -3,10 +3,8 @@ vault_password_file = ENV['DEPLOY_KEY']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
-  # config.vm.box = "tknerr/baseimage-ubuntu-16.04"
-  # config.vm.box_version = "1.0.0"
-  config.vm.box = "minimum/centos-7-docker"
-  config.vm.box_version = "1.1.4"
+  config.vm.box = "tknerr/baseimage-ubuntu-16.04"
+  config.vm.box_version = "1.0.0"
   config.vm.hostname = "ubuntu.rulechains.dev"
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
   config.vm.define "rulechainsservice" do |vm|
@@ -19,8 +17,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, type: "dhcp"
   # Configure the Docker provider for Vagrant
   config.vm.provider "docker" do |d|
+    # d.image = "centos:7
+    # d.image = "centos/s2i-base-centos7"
     d.name = "rulechainsservice"
     d.ports = ['2201:22','8001:80', '3001:3000']
+    # d.remains_running = false
   end
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "ansible/playbook.yml"
@@ -32,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
     ansible.extra_vars = {
       remote_user: "vagrant",
+      # ansible_connection: "docker",
       target_hosts: "rulechains"
     }
     ansible.tags = "deploy"
