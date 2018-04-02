@@ -3,8 +3,10 @@ vault_password_file = ENV['DEPLOY_KEY']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
-  config.vm.box = "tknerr/baseimage-ubuntu-16.04"
-  config.vm.box_version = "1.0.0"
+  # config.vm.box = "tknerr/baseimage-ubuntu-16.04"
+  # config.vm.box_version = "1.0.0"
+  config.vm.box = "minimum/centos-7-docker"
+  config.vm.box_version = "1.1.4"
   config.vm.hostname = "ubuntu.rulechains.dev"
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
   config.vm.define "rulechainsservice" do |vm|
