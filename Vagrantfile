@@ -1,4 +1,5 @@
 VAGRANTFILE_API_VERSION = "2"
+vault_password_file = ENV['DEPLOY_KEY']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
@@ -16,9 +17,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :private_network, type: "dhcp"
   # Configure the Docker provider for Vagrant
   config.vm.provider "docker" do |d|
-  # config.vm.provision "docker" do |d|
     d.name = "rulechainsservice"
     d.ports = ['2201:22','8001:80', '3001:3000']
-    # d.build_dir = "."
+  end
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "ansible/playbook.yml"
+    ansible.become = true
+    ansible.verbose = "vvv"
+    ansible.vault_password_file = vault_password_file
+    ansible.groups = {
+      "rulechains" => ["rulechainsservice"]
+    }
+    ansible.extra_vars = {
+      remote_user: "vagrant"
+    }
+    ansible.tags = "deploy"
   end
 end
