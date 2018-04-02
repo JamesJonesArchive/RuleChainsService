@@ -1,14 +1,24 @@
 ---
+#- name: Stop a container
+#  docker_container:
+#    name: rulechainsservice
+#    state: stopped
+#  tags:
+#    - provision
+#- name: remove container
+#  docker_container:
+#    name: rulechainsservice
+#    state: absent
+#  tags:
+#    - provision
 - name: Stop a container
-  docker_container:
-    name: rulechainsservice
-    state: stopped
+  shell: docker container stop rulechainsservice
+  ignore_errors: yes
   tags:
     - provision
-- name: remove container
-  docker_container:
-    name: rulechainsservice
-    state: absent
+- name: Remove a container
+  shell: docker container rm rulechainsservice
+  ignore_errors: yes
   tags:
     - provision
 - name: Build and start container
