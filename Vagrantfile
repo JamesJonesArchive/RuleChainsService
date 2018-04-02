@@ -29,7 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "rulechains" => ["rulechainsservice"]
     }
     ansible.extra_vars = {
-      remote_user: "vagrant"
+      remote_user: "vagrant",
+      target_hosts: "rulechains"
     }
     ansible.tags = "deploy"
   end
