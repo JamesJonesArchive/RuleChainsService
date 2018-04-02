@@ -16,6 +16,11 @@
       when: "deploy_env == 'Development'"
       tags:
         - publish
+    - name: Provision RuleChainsService
+      include_tasks: provision.yml
+      when: "deploy_env == 'Development'"
+      tags:
+        - provision
     - name: Deploy RuleChainsService
       include_tasks: deploy.yml
       when: "deploy_env == 'Development'"

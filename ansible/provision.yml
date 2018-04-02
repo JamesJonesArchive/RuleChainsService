@@ -1,0 +1,13 @@
+---
+- name: Stop a container
+  docker_container:
+    name: rulechainsservice
+    state: stopped
+- name: remove container
+  docker_container:
+    name: rulechainsservice
+    state: absent
+- name: Build and start container
+  shell: vagrant up
+  args:
+    chdir: "../"
