@@ -1,12 +1,18 @@
 ---
 - name: Ensure the fpm gem installed
   command: gem install fpm
+  tags:
+    - build  
 - file:
     path: ../gradlew
     mode: 0755
+  tags:
+    - build  
 - file:
     path: ../build
     state: absent
+  tags:
+    - build  
 - name: Build RuleChainsService
   shell: "{{ item }}"
   become: no
@@ -15,8 +21,12 @@
   with_items: 
     - "./gradlew clean"
     - "./gradlew build"
+  tags:
+    - build  
 - name: Extract the JCE into Java
   command: "unzip -j -o {{ playbook_dir }}/files/jce/jce_policy-8.zip -d {{ java_home }}/jre/lib/security"
+  tags:
+    - build  
 - name: create RuleChainsService log folder
   file: 
     path: /tmp/rulechains
@@ -25,7 +35,11 @@
   with_items:
     - absent
     - directory
+  tags:
+    - build  
 - name: Build RuleChainsService RPM
   shell: "fpm -s dir -t rpm -n {{ app_name | quote }} -v {{ app_version | quote }} --iteration {{ package_revision | quote }} --description {{ 'RuleChains Service' | quote }} --vendor {{ 'YMD Partners' | quote }} -d {{ 'haveged' | quote }} --config-files /etc/sysconfig/rulechains --config-files /usr/local/etc/rulechains/rulechains-config.yml {{ playbook_dir }}/files/config/rulechains-config.yml=/usr/local/etc/rulechains/rulechains-config.yml {{ playbook_dir }}/files/systemd/rulechains=/etc/sysconfig/rulechains RuleChains-{{ app_version }}.jar=/usr/local/lib/rulechains/RuleChains.jar {{ java_home }}/.=/usr/local/lib/rulechains/jdk8 /tmp/rulechains/.=/var/log/rulechains {{ playbook_dir }}/files/systemd/rulechains.service=/lib/systemd/system/rulechains.service"
   args:
       chdir: "../build/libs"
+  tags:
+    - build  

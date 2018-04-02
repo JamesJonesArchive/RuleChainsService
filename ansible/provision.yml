@@ -3,11 +3,18 @@
   docker_container:
     name: rulechainsservice
     state: stopped
+  tags:
+    - provision
 - name: remove container
   docker_container:
     name: rulechainsservice
     state: absent
+  tags:
+    - provision
 - name: Build and start container
   shell: vagrant up
   args:
     chdir: "../"
+  tags:
+    - provision
+    
