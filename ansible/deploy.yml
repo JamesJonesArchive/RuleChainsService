@@ -41,6 +41,15 @@
   package:
     name: "*"
     state: latest    
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  tags:
+    - deploy
+- name: install the latest updates
+  package:
+    name: "*"
+    state: latest    
+    force_apt_get: True
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags:
     - deploy
 - name: Add config template
