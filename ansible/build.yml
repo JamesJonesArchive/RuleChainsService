@@ -43,3 +43,9 @@
       chdir: "../build/libs"
   tags:
     - build  
+- name: Build RuleChainsService DEB
+  shell: "fpm -s dir -t deb -n {{ app_name | quote }} -v {{ app_version | quote }} --iteration {{ package_revision | quote }} --description {{ 'RuleChains Service' | quote }} --vendor {{ 'YMD Partners' | quote }} -d {{ 'haveged' | quote }} --config-files /etc/sysconfig/rulechains --config-files /usr/local/etc/rulechains/rulechains-config.yml {{ playbook_dir }}/files/config/rulechains-config.yml=/usr/local/etc/rulechains/rulechains-config.yml {{ playbook_dir }}/files/systemd/rulechains=/etc/sysconfig/rulechains RuleChains-{{ app_version }}.jar=/usr/local/lib/rulechains/RuleChains.jar {{ java_home }}/.=/usr/local/lib/rulechains/jdk8 /tmp/rulechains/.=/var/log/rulechains {{ playbook_dir }}/files/systemd/rulechains.service=/lib/systemd/system/rulechains.service"
+  args:
+      chdir: "../build/libs"
+  tags:
+    - build  
