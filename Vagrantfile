@@ -1,5 +1,6 @@
 VAGRANTFILE_API_VERSION = "2"
 vault_password_file = ENV['DEPLOY_KEY']
+deploy_env = ENV['DEPLOY_ENV']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
@@ -33,6 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
     ansible.extra_vars = {
       remote_user: "vagrant",
+      deploy_env: deploy_env,
       # ansible_connection: "docker",
       target_hosts: "rulechains"
     }
