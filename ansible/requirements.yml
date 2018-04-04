@@ -3,4 +3,13 @@
   version: master
   scm: git
   name: inventory
+- src: geerlingguy.repo-epel
+  version: 1.2.2
+  name: repo-epel
+- src: jdauphant.ssl-certs
+  version: v1.4
+  name: sslcerts
+- src: jdauphant.nginx
+  version: v2.15.2
+  name: nginx
 
