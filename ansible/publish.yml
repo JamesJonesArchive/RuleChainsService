@@ -6,15 +6,33 @@
   register: rpmfind
   tags:
     - publish
-- name: Deploy to Bintray
+- name: Find the RuleChains Service DEB that was produced
+  find: 
+    paths: "../build/libs/" 
+    patterns: "RuleChains*.deb"
+  register: debfind
+  tags:
+    - publish
+- name: Deploy RPM to Bintray
   shell: "curl -T {{ workspace }}/build/libs/{{ item.path | basename }} -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/rpm/RuleChainsService/{{ app_version | quote }}/{{ item.path | basename }}"
   with_items: "{{ rpmfind.files|default([]) }}"
   args:
     chdir: "../"
   tags:
     - publish
-- name: Publish the version
+- name: Deploy DEB to Bintray
+  shell: "curl -T {{ workspace }}/build/libs/{{ item.path | basename }} -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/deb/RuleChainsService/{{ app_version | quote }}/{{ item.path | basename }}"
+  with_items: "{{ debfind.files|default([]) }}"
+  args:
+    chdir: "../"
+  tags:
+    - publish
+- name: Publish RPM the version
   shell: "curl -X POST -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/rpm/RuleChainsService/{{ app_version | quote }}/publish"
+  tags:
+    - publish
+- name: Publish DEB the version
+  shell: "curl -X POST -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/deb/RuleChainsService/{{ app_version | quote }}/publish"
   tags:
     - publish
 
