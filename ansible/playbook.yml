@@ -27,12 +27,3 @@
       when: "deploy_env == 'Development'"
       tags:
         - deploy
-
-- hosts: rulechainsservice
-  connection: docker
-  tasks:
-    - name: Some task
-      debug:
-        msg: "I ran"
-      tags:
-        - provision
