@@ -8,11 +8,12 @@
     app_version: "{{ lookup('ini', 'appVersion type=properties file=../gradle.properties') }}"
   gather_facts: no
   tasks:
-    - name: (re)create a container
+    - name: recreate a container
       docker_container:
         name: "{{ inventory_hostname }}"
         image: pacur/centos-7
-        state: started
+        recreate: yes
+        command: ["sleep", "infinity"]
       tags:
         - provision    
     - name: Test connection
