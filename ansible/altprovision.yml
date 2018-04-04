@@ -16,10 +16,4 @@
     name: pacur/centos-7
   tags:
     - provision
-- name: Create a container
-  docker_container:
-    name: rulechainsservice
-    image: pacur/centos-7
-  tags:
-    - provision
 
