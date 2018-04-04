@@ -1,0 +1,32 @@
+---
+- name: Stop a container
+  docker_container:
+    name: rulechainsservice
+    state: stopped
+  tags:
+    - provision
+- name: remove container
+  docker_container:
+    name: rulechainsservice
+    state: absent
+  tags:
+    - provision
+- name: pull an image
+  docker_image:
+    name: pacur/centos-7
+  tags:
+    - provision
+- name: Create a data container
+  docker_container:
+    name: rulechainsservice
+    image: pacur/centos-7
+  tags:
+    - provision
+- hosts: rulechainsservice
+  connection: docker
+  tasks:
+    - name: Some task
+      debug:
+        msg: "I ran"
+      tags:
+        - provision
