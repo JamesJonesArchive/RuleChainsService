@@ -8,11 +8,30 @@
     app_version: "{{ lookup('ini', 'appVersion type=properties file=../gradle.properties') }}"
   gather_facts: no
   tasks:
+    - name: pull an image
+      docker_image:
+        name: pacur/centos-7
+      tags:
+        - provision    
+    - name: Stop a container
+      docker_container:
+        name: "{{ inventory_hostname }}"
+        state: stopped
+      ignore_errors: yes
+      tags:
+        - provision
+    - name: remove container
+      docker_container:
+        name: "{{ inventory_hostname }}"
+        state: absent
+      ignore_errors: yes
+      tags:
+        - provision
     - name: recreate a container
       docker_container:
         name: "{{ inventory_hostname }}"
         image: pacur/centos-7
-        recreate: yes
+        # recreate: yes
         command: ["sleep", "infinity"]
       tags:
         - provision    
