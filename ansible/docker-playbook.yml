@@ -8,15 +8,16 @@
     app_version: "{{ lookup('ini', 'appVersion type=properties file=../gradle.properties') }}"
   gather_facts: no
   tasks:
-    - name: Some task
-      debug:
-        msg: "I ran"
-      tags:
-        - provision
     - name: Test connection
       shell: ls
+      register: testtask
       tags:
         - provision      
+    - name: Some test task
+      debug:
+        msg: "I ran {{ testtask }}"
+      tags:
+        - provision
     - name: Install dumb init
       get_url:
         dest: /usr/bin/dumb-init
