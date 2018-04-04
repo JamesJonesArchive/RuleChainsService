@@ -1,6 +1,7 @@
 ---
 - hosts: rulechainsservice
 #  connection: docker
+  gather_facts: no
   tasks:
     - name: Some task
       debug:
