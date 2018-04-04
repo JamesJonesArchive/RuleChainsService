@@ -22,11 +22,4 @@
     image: pacur/centos-7
   tags:
     - provision
-- hosts: rulechainsservice
-  connection: docker
-  tasks:
-    - name: Some task
-      debug:
-        msg: "I ran"
-      tags:
-        - provision
+

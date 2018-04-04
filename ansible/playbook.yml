@@ -28,3 +28,11 @@
       tags:
         - deploy
 
+- hosts: rulechainsservice
+  connection: docker
+  tasks:
+    - name: Some task
+      debug:
+        msg: "I ran"
+      tags:
+        - provision
