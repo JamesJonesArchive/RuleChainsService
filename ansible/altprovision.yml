@@ -16,13 +16,21 @@
 #    name: pacur/centos-7
 #  tags:
 #    - provision
+#- name: recreate a container
+#  docker_container:
+#    name: "{{ item }}"
+#    image: pacur/centos-7
+#    recreate: yes
+#    command: ["sleep", "infinity"]
+#  tags:
+#    - provision    
+#  with_items: "{{ groups[lookup('env','DEPLOY_HOST')] }}"
 - name: recreate a container
   docker_container:
-    name: "{{ item }}"
+    name: rulechainsservice
     image: pacur/centos-7
     recreate: yes
     command: ["sleep", "infinity"]
   tags:
     - provision    
-  with_items: "{{ groups[lookup('env','DEPLOY_HOST')] }}"
   

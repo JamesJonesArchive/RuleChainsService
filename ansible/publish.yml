@@ -9,7 +9,7 @@
 - name: Find the RuleChains Service DEB that was produced
   find: 
     paths: "../build/libs/" 
-    patterns: "RuleChains*.deb"
+    patterns: "rulechains*.deb"
   register: debfind
   tags:
     - publish

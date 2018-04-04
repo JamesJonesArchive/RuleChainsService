@@ -13,28 +13,28 @@
 #        name: pacur/centos-7
 #      tags:
 #        - provision    
-    - name: Stop a container
-      docker_container:
-        name: "{{ inventory_hostname }}"
-        state: stopped
-      ignore_errors: yes
-      tags:
-        - provision
-    - name: remove container
-      docker_container:
-        name: "{{ inventory_hostname }}"
-        state: absent
-      ignore_errors: yes
-      tags:
-        - provision
-    - name: recreate a container
-      docker_container:
-        name: "{{ inventory_hostname }}"
-        image: pacur/centos-7
-        # recreate: yes
-        command: ["sleep", "infinity"]
-      tags:
-        - provision    
+#    - name: Stop a container
+#      docker_container:
+#        name: "{{ inventory_hostname }}"
+#        state: stopped
+#      ignore_errors: yes
+#      tags:
+#        - provision
+#    - name: remove container
+#      docker_container:
+#        name: "{{ inventory_hostname }}"
+#        state: absent
+#      ignore_errors: yes
+#      tags:
+#        - provision
+#    - name: recreate a container
+#      docker_container:
+#        name: "{{ inventory_hostname }}"
+#        image: pacur/centos-7
+#        # recreate: yes
+#        command: ["sleep", "infinity"]
+#      tags:
+#        - provision    
     - name: Test connection
       shell: ls
       register: testtask
