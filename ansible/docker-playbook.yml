@@ -13,6 +13,10 @@
         msg: "I ran"
       tags:
         - provision
+    - name: Test connection
+      shell: ls
+      tags:
+        - provision      
     - name: Install dumb init
       get_url:
         dest: /usr/bin/dumb-init
