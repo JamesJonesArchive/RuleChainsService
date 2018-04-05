@@ -29,6 +29,7 @@
   docker_container:
     name: rulechainsservice
     image: pacur/centos-7
+    state: started
     recreate: yes
     command: ["sleep", "infinity"]
   tags:
