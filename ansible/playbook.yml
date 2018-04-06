@@ -13,7 +13,7 @@
         - build
     - name: Publish RuleChainsService
       include_tasks: publish.yml
-      when: "deploy_env == 'Development'"
+      when: "deploy_env == 'Production'"
       tags:
         - publish
     - name: Provision RuleChainsService
