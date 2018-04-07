@@ -51,8 +51,8 @@ import com.ymd.RuleChains.repositories.LinkRepository
  */
 @Service
 class LinkServiceImpl implements LinkService {
-    @Autowired
-    private LinkRepository linkRepository;
+  @Autowired
+  private LinkRepository linkRepository;
 
 }
 
