@@ -8,6 +8,7 @@ package com.ymd.RuleChains.services
 
 import com.ymd.RuleChains.entities.Chain
 import com.ymd.RuleChains.repositories.ChainRepository
+import java.util.function.Predicate
 import java.util.regex.Pattern
 import java.util.stream.Stream
 import javax.persistence.EntityManagerFactory
@@ -49,9 +50,8 @@ class ChainServiceImpl implements ChainService {
 //      }
       // Java 8 filter
       Pattern p = Pattern.compile(pattern.trim())
-      return chainRepository.findAll().stream().filter { c -> 
-        p.matcher(c.name).find()
-      }.collect(Collectors.toList())
+      Predicate<Chain> chainNamePredicate = { c -> p.matcher(c.name).find() }
+      return chainRepository.findAll().stream().filter(chainNamePredicate).collect(Collectors.toList())
     } else {
       return chainRepository.findAll()
     }
