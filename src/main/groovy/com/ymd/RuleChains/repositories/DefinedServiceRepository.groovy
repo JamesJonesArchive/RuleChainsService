@@ -20,10 +20,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Repository
 @Transactional
-interface DefinedServiceRepository extends JpaRepository<DefinedService, Long> {
-  @Modifying
-  @Query("update DefinedService r set r.name = :newname where r.name = :oldname")
-  void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
+interface DefinedServiceRepository extends RuleRepository<DefinedService> {
 
 }
 

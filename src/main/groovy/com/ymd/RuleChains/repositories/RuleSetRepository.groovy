@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional
 @Repository
 @Transactional
 interface RuleSetRepository extends JpaRepository<RuleSet, Long> {
+  RuleSet findByName(String name)
+  List<RuleSet> findAll()
   @Modifying
   @Query("update RuleSet r set r.name = :newname where r.name = :oldname")
   void updateName(@Param("oldname") String oldname, @Param("newname") String newname)

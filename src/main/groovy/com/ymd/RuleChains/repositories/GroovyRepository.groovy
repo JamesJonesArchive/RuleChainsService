@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Repository
 @Transactional
-interface GroovyRepository  extends JpaRepository<Groovy, Long> {
-	@Modifying
-  @Query("update Groovy r set r.name = :newname where r.name = :oldname")
-  void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
+interface GroovyRepository  extends RuleRepository<Groovy> {
+
 }
 

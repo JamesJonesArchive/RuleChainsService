@@ -15,7 +15,11 @@
 
 package com.ymd.RuleChains.services
 
+import com.ymd.RuleChains.entities.RuleSet
 import java.util.stream.Collectors
+import java.util.stream.Stream
+import java.util.function.Predicate
+import java.util.regex.Pattern
 import java.text.SimpleDateFormat
 import java.text.DateFormat
 import java.lang.Exception
@@ -53,6 +57,47 @@ import com.ymd.RuleChains.repositories.RuleSetRepository
 class RuleSetServiceImpl implements RuleSetService {
   @Autowired
   private RuleSetRepository ruleSetRepository
+  /**
+   * Returns a list of RuleSet objects with an optional matching filter
+   * 
+   * @param  pattern  An optional parameter. When provided the full list (default) will be filtered down with the regex pattern string when provided
+   * @return          The resulting list of Chain objects
+   * @see    RuleSet
+   */   
+  @Override
+  List<RuleSet> listRuleSets(String pattern = null) {
+    if(!!pattern) {
+      // Filter with custom predicate
+      Pattern p = Pattern.compile(pattern.trim())
+      Predicate<RuleSet> ruleSetNamePredicate = { rs -> p.matcher(rs.name).find() }
+      return ruleSetRepository.findAll().stream().filter(ruleSetNamePredicate).collect(Collectors.toList())
+    } else {
+      return ruleSetRepository.findAll()
+    }
+  }
+  /**
+   * Returns a RuleSet object that matches the provided name
+   * 
+   * @param name  The name of the chain to be returned
+   * @return      The RuleSet object matching the specified chain name
+   */ 
+  @Override
+  RuleSet getRuleSetByName(String name) {
+    return ruleSetRepository.findByName(name)
+  }
+  /**
+   * Updates a RuleSet's name and returns the updated Chain object
+   *
+   * @param   oldname  A string representing the original RuleSet name
+   * @param   newname  A string representing the updated RuleSet name
+   * @return  The updated RuleSet object
+   * @see     RuleSet
+   */
+  @Override
+  RuleSet updateRuleSetName(String oldname,String newname) {
+    ruleSetRepository.updateName(oldname,newname)
+    return ruleSetRepository.findByName(newname)
+  }
   
 }
 

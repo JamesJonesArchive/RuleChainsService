@@ -10,6 +10,7 @@ import com.ymd.RuleChains.entities.Rule
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.NoRepositoryBean
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -17,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional
  *
  * @author jam
  */
-@Repository
-@Transactional
-interface RuleRepository extends JpaRepository<Rule, Long> {
+@NoRepositoryBean
+interface RuleRepository<T extends Rule> extends JpaRepository<T, Long> {
+  T findByName(String name)
+  List<T> findAll()
   @Modifying
-  @Query("update Rule r set r.name = :newname where r.name = :oldname")
+  @Query("update #{#entityName} r set r.name = :newname where r.name = :oldname")
   void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
-
 }
 

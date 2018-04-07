@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Repository
 @Transactional
-interface SnippetRepository extends JpaRepository<Snippet, Long> {
-  @Modifying
-  @Query("update Snippet r set r.name = :newname where r.name = :oldname")
-  void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
+interface SnippetRepository extends RuleRepository<Snippet> {
+  
 }
 

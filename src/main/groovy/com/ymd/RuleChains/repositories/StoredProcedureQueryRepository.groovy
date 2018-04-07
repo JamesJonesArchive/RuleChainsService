@@ -19,9 +19,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Repository
 @Transactional
-interface StoredProcedureQueryRepository extends JpaRepository<StoredProcedureQuery, Long> {
-  @Modifying
-  @Query("update StoredProcedureQuery r set r.name = :newname where r.name = :oldname")
-  void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
+interface StoredProcedureQueryRepository extends RuleRepository<StoredProcedureQuery> {
+  
 }
 

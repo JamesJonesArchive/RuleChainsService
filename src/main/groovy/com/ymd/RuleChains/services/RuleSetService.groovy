@@ -6,11 +6,15 @@
 
 package com.ymd.RuleChains.services
 
+import com.ymd.RuleChains.entities.RuleSet
+
 /**
  *
  * @author jam
  */
 interface RuleSetService {
-	
+  List<RuleSet> listRuleSets(String pattern)
+  RuleSet getRuleSetByName(String name)
+  RuleSet updateRuleSetName(String oldname,String newname)	
 }
 
