@@ -8,6 +8,7 @@ package com.ymd.RuleChains.services
 
 import com.ymd.RuleChains.entities.Chain
 import com.ymd.RuleChains.repositories.ChainRepository
+import java.util.regex.Pattern
 import java.util.stream.Stream
 import javax.persistence.EntityManagerFactory
 import org.hibernate.SessionFactory
@@ -47,8 +48,9 @@ class ChainServiceImpl implements ChainService {
 //        Pattern.compile(pattern.trim()).matcher(it.name).matches()
 //      }
       // Java 8 filter
+      Pattern p = Pattern.compile(pattern.trim())
       return chainRepository.findAll().stream().filter { c -> 
-        Pattern.compile(pattern.trim()).matcher(c.name).matches()
+        p.matcher(c.name).find()
       }.collect(Collectors.toList())
     } else {
       return chainRepository.findAll()
