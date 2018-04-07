@@ -56,7 +56,7 @@ class ChainServiceImpl implements ChainService {
   }
   @Override
   Chain updateChainName(String oldname,String newname) {
-    chainRepository.updateChainName(oldname,newname)
+    chainRepository.updateName(oldname,newname)
     return chainRepository.findByName(newname)
   }
 }

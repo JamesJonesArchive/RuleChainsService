@@ -25,6 +25,6 @@ interface ChainRepository extends JpaRepository<Chain, Long> {
   List<Chain> findAll()
   @Modifying
   @Query("update Chain c set c.name = :newname where c.name = :oldname")
-  void updateChainName(@Param("oldname") String oldname, @Param("newname") String newname)
+  void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
 }
 
