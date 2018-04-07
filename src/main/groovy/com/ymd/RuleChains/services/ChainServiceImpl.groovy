@@ -52,6 +52,14 @@ class ChainServiceImpl implements ChainService {
       return chainRepository.findAll()
     }
   }
+  /**
+   * Updates a Chain's name and returns the updated Chain object
+   *
+   * @param   oldname  A string representing the original chain name
+   * @param   newname  A string representing the updated chain name
+   * @return  The updated Chain object
+   * @see     Chain
+   */
   @Override
   Chain updateChainName(String oldname,String newname) {
     chainRepository.updateName(oldname,newname)
