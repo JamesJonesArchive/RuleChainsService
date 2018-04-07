@@ -7,7 +7,10 @@
 package com.ymd.RuleChains.repositories
 
 import com.ymd.RuleChains.entities.Chain
+import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
@@ -20,5 +23,8 @@ import org.springframework.transaction.annotation.Transactional
 interface ChainRepository extends JpaRepository<Chain, Long> {
   Chain findByName(String name)
   List<Chain> findAll()
+  @Modifying
+  @Query("update Chain c set c.name = :newname where c.name = :oldname")
+  void updateChainName(@Param("oldname") String oldname, @Param("newname") String newname)
 }
 

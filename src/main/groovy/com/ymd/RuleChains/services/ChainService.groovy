@@ -53,5 +53,6 @@ import org.springframework.transaction.annotation.Propagation
 interface ChainService {
   List<Chain> listChains(String pattern)
   Chain getChainByName(String name)
+  Chain updateChainName(String oldname,String newname)
 }
 

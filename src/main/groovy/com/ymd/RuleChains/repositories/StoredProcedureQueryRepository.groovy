@@ -8,6 +8,9 @@ package com.ymd.RuleChains.repositories
 
 import com.ymd.RuleChains.entities.StoredProcedureQuery
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
+import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 /**
@@ -17,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional
 @Repository
 @Transactional
 interface StoredProcedureQueryRepository extends JpaRepository<StoredProcedureQuery, Long> {
-	
+  @Modifying
+  @Query("update StoredProcedureQuery r set r.name = :newname where r.name = :oldname")
+  void updateName(@Param("oldname") String oldname, @Param("newname") String newname)
 }
 

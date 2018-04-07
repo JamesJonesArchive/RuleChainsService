@@ -8,6 +8,7 @@ package com.ymd.RuleChains.services
 
 import com.ymd.RuleChains.entities.Chain
 import com.ymd.RuleChains.repositories.ChainRepository
+import java.util.stream.Stream
 import javax.persistence.EntityManagerFactory
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -52,6 +53,11 @@ class ChainServiceImpl implements ChainService {
     } else {
       return chainRepository.findAll()
     }
+  }
+  @Override
+  Chain updateChainName(String oldname,String newname) {
+    chainRepository.updateChainName(oldname,newname)
+    return chainRepository.findByName(newname)
   }
 }
 
