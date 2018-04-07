@@ -44,11 +44,7 @@ class ChainServiceImpl implements ChainService {
   @Override
   List<Chain> listChains(String pattern = null) { 
     if(!!pattern) {
-      // Groovy
-//      return chainRepository.findAll().findAll {
-//        Pattern.compile(pattern.trim()).matcher(it.name).matches()
-//      }
-      // Java 8 filter
+      // Filter with custom predicate
       Pattern p = Pattern.compile(pattern.trim())
       Predicate<Chain> chainNamePredicate = { c -> p.matcher(c.name).find() }
       return chainRepository.findAll().stream().filter(chainNamePredicate).collect(Collectors.toList())
