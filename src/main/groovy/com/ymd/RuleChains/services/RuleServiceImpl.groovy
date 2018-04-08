@@ -16,11 +16,19 @@
 
 package com.ymd.RuleChains.services
 
+import com.ymd.RuleChains.entities.DefinedService
+import com.ymd.RuleChains.entities.Groovy
+import com.ymd.RuleChains.entities.Rule
+import com.ymd.RuleChains.entities.SQLQuery
+import com.ymd.RuleChains.entities.Snippet
+import com.ymd.RuleChains.entities.StoredProcedureQuery
 import com.ymd.RuleChains.repositories.DefinedServiceRepository
 import com.ymd.RuleChains.repositories.GroovyRepository
+import com.ymd.RuleChains.repositories.RuleRepository
 import com.ymd.RuleChains.repositories.SQLQueryRepository
 import com.ymd.RuleChains.repositories.SnippetRepository
 import com.ymd.RuleChains.repositories.StoredProcedureQueryRepository
+import java.util.function.Function
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -40,5 +48,26 @@ class RuleServiceImpl implements RuleService {
   private GroovyRepository groovyRepository;
 	@Autowired
   private DefinedServiceRepository definedServiceRepository;
+  /**
+   * Retrieves the appropriate respository for the type of rule provided
+   * 
+   * @param  Rule    A type of supported rule
+   * @return Object  A repository for the entity the rule is part of
+   */
+  private Object getRuleRepository(Rule rule) throws ClassNotFoundException {
+    if(rule instanceof StoredProcedureQuery) {
+      return storedProcedureQueryRepository
+    } else if(rule instanceof Snippet) {
+      return snippetRepository
+    } else if(rule instanceof SQLQuery) {
+      return sQLQueryRepository
+    } else if(rule instanceof Groovy) {
+      return groovyRepository
+    } else if(rule instanceof DefinedService) {
+      return definedServiceRepository
+    } else {
+      throw new ClassNotFoundException()
+    }
+  }
 }
 
