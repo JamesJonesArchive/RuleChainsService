@@ -28,10 +28,11 @@
 - name: recreate a container
   docker_container:
     name: rulechainsservice
-    image: pacur/centos-7
+    image: phusion/baseimage:0.10.1
     state: started
     recreate: yes
-    command: ["sleep", "infinity"]
+    command: "/sbin/my_init"
+    # command: ["sleep", "infinity"]
   tags:
     - provision    
   
