@@ -69,5 +69,8 @@ class RuleServiceImpl implements RuleService {
       throw new ClassNotFoundException()
     }
   }
+  
+  
+
 }
 

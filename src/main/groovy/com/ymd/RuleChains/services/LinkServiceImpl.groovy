@@ -15,6 +15,9 @@
 
 package com.ymd.RuleChains.services
 
+import com.ymd.RuleChains.repositories.LinkRepository
+import com.ymd.RuleChains.entities.Link
+import java.util.function.Function
 import java.util.stream.Collectors
 import java.text.SimpleDateFormat
 import java.text.DateFormat
@@ -43,7 +46,10 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult
 import org.springframework.transaction.support.TransactionTemplate
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.annotation.Propagation
-import com.ymd.RuleChains.repositories.LinkRepository
+import groovy.lang.GroovyShell
+import groovy.lang.Script
+import groovy.lang.Binding
+import org.codehaus.groovy.control.CompilationFailedException
 
 /**
  *
@@ -54,5 +60,30 @@ class LinkServiceImpl implements LinkService {
   @Autowired
   private LinkRepository linkRepository;
 
+  private List execute(Function<List, Link> function, Link link) {
+    Script inputReorder = buildGroovyScript(link.inputReorder)
+    Script outputReorder = buildGroovyScript(link.outputReorder)
+    return function.apply(link);
+  }
+  
+//  public static Closure<?> buildClosure(String closureString) {
+//    String scriptText = "{ script -> " + closureString + " }";
+//    return (Closure<?>) new GroovyShell().evaluate(scriptText);
+//  }
+
+  public static Script buildGroovyScript(String raw,Map variables) throws CompilationFailedException {
+    try {
+      Script gscript =  new GroovyShell().parse(raw)
+      Binding binding = new Binding(variables)
+      gscript.setBinding(binding)
+      return gscript
+    } catch (CompilationFailedException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  
+//  inputReorder = ''
+//  private String outputReorder = ''
 }
 
