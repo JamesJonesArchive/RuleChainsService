@@ -9,6 +9,7 @@
     app_version: "{{ lookup('ini', 'appVersion type=properties file=../gradle.properties') }}"
   pre_tasks:
   - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
     tags:
       - provision      
   - setup: # aka gather_facts

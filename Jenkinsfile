@@ -22,7 +22,7 @@ node('master') {
   }
   if( env.DEPLOY_ENV.equals("Development") ) {
     stage("Merge in UI build") {
-        build job: '${env.UI_JOB_NAME}', wait: true
+        build job: "${env.UI_JOB_NAME}", wait: true
     }
   }
 //  stage('Deploy RuleChainsService with ansible') {
