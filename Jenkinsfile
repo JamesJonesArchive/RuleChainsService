@@ -21,7 +21,7 @@ node('master') {
     }
   }
   if( env.DEPLOY_ENV.equals("Development") ) {
-    stage("trigger ui build") {
+    stage("Merge in UI build") {
         build job: '${env.UI_JOB_NAME}', wait: true
     }
   }
