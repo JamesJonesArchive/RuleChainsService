@@ -37,7 +37,7 @@
         src: "{{ item }}"
         dest: /tmp/debs
       with_fileglob:
-        - "../rulechains*.deb"
+        - "../build/libs/rulechains*.deb"
       tags:
         - provision
     - name: Find the rulechains package that was produced
