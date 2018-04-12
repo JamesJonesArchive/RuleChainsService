@@ -7,6 +7,9 @@
     app_name: "{{ lookup('ini', 'appBaseName type=properties file=../gradle.properties') }}"
     app_version: "{{ lookup('ini', 'appVersion type=properties file=../gradle.properties') }}"
   gather_facts: no
+  pre_tasks:
+  - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+  - setup: # aka gather_facts
   tasks:
 #    - name: pull an image
 #      docker_image:
