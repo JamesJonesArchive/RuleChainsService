@@ -9,7 +9,11 @@
   gather_facts: no
   pre_tasks:
   - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    tags:
+      - provision      
   - setup: # aka gather_facts
+    tags:
+      - provision      
   tasks:
 #    - name: pull an image
 #      docker_image:
