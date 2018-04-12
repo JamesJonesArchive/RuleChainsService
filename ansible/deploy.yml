@@ -1,42 +1,62 @@
 ---
-#- name: install jdk 8
-#  package:
-#    name: "{{ item }}"
-#    state: latest
-#  with_items:
-#    - java-1.8.0-openjdk
-#    - java-1.8.0-openjdk-devel
-#  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-#  tags:
-#    - deploy
-#- name: install jdk 8
-#  package:
-#    name: "{{ item }}"
-#    state: latest
-#  with_items:
-#    - openjdk-8-jdk
-#  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-#  tags:
-#    - deploy
-- name: Add RuleChains Repo
-  yum_repository:
-    name: "{{ rulechainsrepo.name }}"
-    description: "{{ rulechainsrepo.name }}"
-    baseurl: "{{ rulechainsrepo.baseurl }}"
-    gpgcheck: "{{ rulechainsrepo.gpgcheck }}"
-    repo_gpgcheck: "{{ rulechainsrepo.repo_gpgcheck }}"
-    enabled: "{{ rulechainsrepo.enabled }}"
-    metadata_expire: 1200
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-  tags:
-    - deploy
-- name: install the latest version of RuleChains
-  package:
-    name: RuleChains
-    state: latest
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-  tags:
-    - deploy
+- block:
+  - name: Add RuleChains Repo
+    yum_repository:
+      name: "{{ rulechainsrepo.name }}"
+      description: "{{ rulechainsrepo.name }}"
+      baseurl: "{{ rulechainsrepo.baseurl }}"
+      gpgcheck: "{{ rulechainsrepo.gpgcheck }}"
+      repo_gpgcheck: "{{ rulechainsrepo.repo_gpgcheck }}"
+      enabled: "{{ rulechainsrepo.enabled }}"
+      metadata_expire: 1200
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    tags:
+      - deploy
+  - name: install the latest version of RuleChains
+    package:
+      name: RuleChains
+      state: latest
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    tags:
+      - deploy
+  when: "deploy_env == 'Production'"
+- block:
+  - name: create package folder
+    file:
+      path: /tmp/debs
+      state: "{{ item }}"
+    with_items:
+      - absent
+      - directory
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    tags:
+      - deploy
+  - name: Copy package to remote host
+    copy:
+      src: "{{ item }}"
+      dest: /tmp/debs
+    with_fileglob:
+      - "../build/libs/rulechains*.deb"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    tags:
+      - deploy
+  - name: Find the rulechains package that was produced
+    find:
+      paths: "/tmp/debs"
+      patterns: "rulechains*.deb"
+    register: iffind
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    tags:
+      - deploy
+  - name: Install a rulechains .deb package
+    apt:
+      deb: "{{ item.path }}"
+    with_items: "{{ iffind.files|default([]) }}"
+    register: rc_result
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    tags:
+      - deploy
+  when: "deploy_env != 'Production'"
 - name: install the latest updates
   package:
     name: "*"

@@ -1,6 +1,6 @@
 ---
 - hosts: "{{ target_hosts }}"
-  gather_facts: "{{ gather_facts }}"
+  gather_facts: "{{ gather_facts|default(true)|bool }}"
   vars_files:
     - ./vars/main.yml
     - ./vars/vault.yml
@@ -11,10 +11,11 @@
   - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
     tags:
-      - provision      
+      - deploy      
   - setup: # aka gather_facts
+    when: "gather_facts|default(true)|bool == false"
     tags:
-      - provision      
+      - deploy      
   tasks:
     - name: Build RuleChainsService
       include_tasks: build.yml
@@ -31,6 +32,6 @@
         - provision
     - name: Deploy RuleChainsService
       include_tasks: deploy.yml
-      when: "deploy_env == 'Development'"
+      # when: "deploy_env == 'Development'"
       tags:
         - deploy
