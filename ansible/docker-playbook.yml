@@ -47,10 +47,9 @@
       register: iffind
       tags:
         - provision
-    - name: Install rulechains package
-      package:
-        name: "{{ item.path }}"
-        state: present
+    - name: Install a rulechains .deb package
+      apt:
+        deb: "{{ item.path }}"
       with_items: "{{ iffind.files|default([]) }}"
       register: rc_result
       tags:

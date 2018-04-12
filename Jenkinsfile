@@ -20,6 +20,11 @@ node('master') {
       sh('#!/bin/sh -e\n' + "ansible-playbook -i ansible/roles/inventory/${env.DEPLOY_ENV.toLowerCase()}/hosts --user=root --vault-password-file=${env.DEPLOY_KEY} ansible/docker-playbook.yml --extra-vars 'target_hosts=${env.DEPLOY_HOST} java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER} workspace=${env.WORKSPACE} bintray_api_key=${env.BINTRAY_API_KEY}' -b -t provision -vvvv")
     }
   }
+  if( env.DEPLOY_ENV == "Development") {
+    stage("trigger ui build") {
+        build job: 'RuleChainsServiceUI_Develop', wait: true
+    }
+  }
 //  stage('Deploy RuleChainsService with ansible') {
 //    sshagent (credentials: ['jenkins_ymd_key']) {
 //      sh('#!/bin/sh -e\n' + "ansible-playbook -i ansible/roles/inventory/${env.DEPLOY_ENV.toLowerCase()}/hosts --user=jenkins --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=${env.DEPLOY_HOST} java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER}' -b -t deploy")
