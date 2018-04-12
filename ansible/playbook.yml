@@ -26,9 +26,7 @@
       tags:
         - publish
     - name: Provision RuleChainsService
-#      include_tasks: provision.yml
-      include_tasks: altprovision.yml
-      when: "deploy_env == 'Development'"
+      include_tasks: provision.yml
       tags:
         - provision
     - name: Deploy RuleChainsService
