@@ -96,6 +96,7 @@
       package:
         name: "*"
         state: latest
+        force_apt_get: True
       tags:
         - provision
         
