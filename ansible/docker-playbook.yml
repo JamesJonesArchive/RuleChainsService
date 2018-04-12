@@ -15,43 +15,6 @@
     tags:
       - provision      
   tasks:
-#    - name: pull an image
-#      docker_image:
-#        name: pacur/centos-7
-#      tags:
-#        - provision    
-#    - name: Stop a container
-#      docker_container:
-#        name: "{{ inventory_hostname }}"
-#        state: stopped
-#      ignore_errors: yes
-#      tags:
-#        - provision
-#    - name: remove container
-#      docker_container:
-#        name: "{{ inventory_hostname }}"
-#        state: absent
-#      ignore_errors: yes
-#      tags:
-#        - provision
-#    - name: recreate a container
-#      docker_container:
-#        name: "{{ inventory_hostname }}"
-#        image: pacur/centos-7
-#        # recreate: yes
-#        command: ["sleep", "infinity"]
-#      tags:
-#        - provision    
-    - name: Test connection
-      shell: ls
-      register: testtask
-      tags:
-        - provision      
-    - name: Some test task
-      debug:
-        msg: "I ran {{ testtask }}"
-      tags:
-        - provision
     - name: install jdk 8
       package:
         name: "{{ item }}"
@@ -99,4 +62,10 @@
         force_apt_get: True
       tags:
         - provision
-        
+    - name: Add config template
+      template:
+        src: "{{ playbook_dir }}/templates/config/rulechains-config.yml.j2"
+        dest: /usr/local/etc/rulechains/rulechains-config.yml
+        mode: 0644
+      tags:
+        - provision
