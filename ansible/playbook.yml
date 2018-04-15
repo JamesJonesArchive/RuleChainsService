@@ -15,7 +15,9 @@
   - setup: # aka gather_facts
     when: "gather_facts|default(true)|bool == false"
     tags:
-      - deploy      
+      - deploy     
+  roles:
+    - { role: 'nginx', tags: ["deploy"] }
   tasks:
     - name: Build RuleChainsService
       include_tasks: build.yml
