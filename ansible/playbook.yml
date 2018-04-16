@@ -17,7 +17,8 @@
     tags:
       - deploy     
   roles:
-    - { role: 'nginx', tags: ["deploy"] }
+    - role: 'nginx'
+      tags: ["deploy"]
   tasks:
     - name: Build RuleChainsService
       include_tasks: build.yml

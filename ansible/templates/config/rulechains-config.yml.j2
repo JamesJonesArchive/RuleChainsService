@@ -49,6 +49,8 @@ spring:
     multipart:
       max-file-size: 4096KB
       max-request-size: 4096KB
+server:
+  port: {{ rulechains[deploy_env].config.port }}
 storage:
   location: /tmp
 logging:
