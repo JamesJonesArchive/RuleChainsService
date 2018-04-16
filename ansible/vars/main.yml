@@ -6,6 +6,9 @@ rulechainsrepo:
   repo_gpgcheck: no
   enabled: yes
 nginx_sites_default_root: /usr/local/lib/rulechains/ui  
+nginx_start_service: false
+nginx_start_at_boot: false
+nginx_daemon_mode: "off"
 nginx_configs:
   proxy:
     - proxy_set_header X-Real-IP  $remote_addr
