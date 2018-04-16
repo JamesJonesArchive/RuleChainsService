@@ -72,11 +72,33 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags:
     - deploy
+- name: create RuleChains env config
+  template:
+    src: "../templates/systemd/rulechains.j2"
+    dest: /etc/sysconfig/rulechains
+    mode: 0644
+    backup: no    
 - name: Add config template
   template:
     src: "{{ playbook_dir }}/templates/config/rulechains-config.yml.j2"
     dest: /usr/local/etc/rulechains/rulechains-config.yml
     mode: 0644
   tags:
-    - deploy
-    
+    - deploy    
+- name: create runit folders
+  file:
+    path: "/etc/service/{{ item }}"
+    state: directory
+  with_items:
+    - rulechains
+    - nginx
+- name: Copy over runit files
+  copy:
+    src: "../files/runit/{{ item }}"
+    dest: "/etc/service/{{ item | splitext | first }}/run"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - rulechains.sh
+    - nginx.sh
