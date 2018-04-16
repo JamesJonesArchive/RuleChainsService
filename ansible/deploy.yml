@@ -92,6 +92,8 @@
   with_items:
     - rulechains
     - nginx
+  tags:
+    - deploy    
 - name: Copy over runit files
   copy:
     src: "../files/runit/{{ item }}"
@@ -102,3 +104,6 @@
   with_items:
     - rulechains.sh
     - nginx.sh
+  tags:
+    - deploy    
+    
