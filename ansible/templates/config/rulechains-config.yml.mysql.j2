@@ -13,7 +13,7 @@ spring:
     url: "{{ rulechains[deploy_env].database.url }}"
     username: {{ rulechains[deploy_env].database.user }}
     password: {{ rulechains[deploy_env].database.password }}
-    driver-class-name: {{ rulechains[deploy_env].database.driver_class_name }}
+    driver-class-name: org.mariadb.jdbc.Driver
     hikari:
       connectionTimeout: 60000
       maximumPoolSize: 15
@@ -56,7 +56,7 @@ storage:
 logging:
   level:
     org.springframework.web: DEBUG
-    com.ymd.RuleChains: DEBUG
+    edu.usf.it.PersonRegistry: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

@@ -15,7 +15,18 @@
   - setup: # aka gather_facts
     when: "gather_facts|default(true)|bool == false"
     tags:
-      - deploy     
+      - deploy   
+  - set_fact:
+      postgresql_users:
+        - name: "{{ rulechains[deploy_env].database.user }}"
+          password: "{{ rulechains[deploy_env].database.password }}"
+      postgresql_databases:
+        - name: "{{ rulechains[deploy_env].database.dbname }}"
+      postgresql_hba_entries:
+        - { type: host, database: "{{ rulechains[deploy_env].database.dbname }}", user: "{{ rulechains[deploy_env].database.user }}", address: '127.0.0.1/32', auth_method: password }
+    when: "deploy_env != 'Production'"
+    tags:
+      - deploy   
   roles:
     - role: 'nginx'
       tags: ["deploy"]
