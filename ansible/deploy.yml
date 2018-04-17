@@ -1,4 +1,8 @@
 ---
+- name: install sudo
+  package:
+    name: "sudo"
+    state: latest    
 - block:
   - name: Add RuleChains Repo
     yum_repository:
