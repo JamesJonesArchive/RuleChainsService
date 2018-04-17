@@ -4,6 +4,8 @@
     name: "sudo"
     state: latest    
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags:
+    - deploy
 - block:
   - name: Add RuleChains Repo
     yum_repository:
