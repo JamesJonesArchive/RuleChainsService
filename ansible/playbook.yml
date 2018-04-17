@@ -19,6 +19,8 @@
   roles:
     - role: 'nginx'
       tags: ["deploy"]
+    - role: postgresql
+      tags: ["deploy"]
   tasks:
     - name: Build RuleChainsService
       include_tasks: build.yml

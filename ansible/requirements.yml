@@ -14,4 +14,9 @@
   name: nginx
   tags:
     - deploy
+- src: geerlingguy.postgresql
+  version: 1.3.2
+  name: postgresql
+  tags:
+    - deploy
 
