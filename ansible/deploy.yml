@@ -1,17 +1,4 @@
 ---
-- name: install dbus
-  package:
-    name: "dbus"
-    state: latest    
-    # force_apt_get: True
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  tags:
-    - deploy
-- name: set timezone to America/New_York
-  timezone:
-    name: America/New_York
-  tags:
-    - deploy    
 - block:
   - name: Add RuleChains Repo
     yum_repository:
