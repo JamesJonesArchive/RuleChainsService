@@ -55,7 +55,7 @@ dependencies {
   // Snake yaml is supposed to be in spring-boot-starter
   // runtime "com.oracle:ojdbc7:12.1.0"
   runtime "org.mariadb.jdbc:mariadb-java-client:2.1.0"    
-
+  compile("org.postgresql:postgresql:42.2.2")
   compile("com.h2database:h2")
   testCompile("junit:junit")
   testCompile("org.springframework.boot:spring-boot-starter-test")

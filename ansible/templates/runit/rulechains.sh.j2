@@ -1,0 +1,4 @@
+#!/bin/sh
+# `/sbin/setuser memcache` runs the given command as the user `memcache`.
+# If you omit that part, the command will be run as root.
+exec /usr/bin/java -Dgrails.env=prod -jar /usr/local/lib/rulechains/RuleChains.jar --spring.config.name={{ rulechains[deploy_env].config.name }} --server.port={{ rulechains[deploy_env].config.port }} --spring.config.location={{ rulechains[deploy_env].config.location }}

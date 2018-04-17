@@ -94,16 +94,22 @@
     - nginx
   tags:
     - deploy    
-- name: Copy over runit files
+- name: Copy over nginx runit file
   copy:
-    src: "../files/runit/{{ item }}"
+    src: "{{ playbook_dir }}/files/runit/{{ item }}"
     dest: "/etc/service/{{ item | splitext | first }}/run"
     owner: root
     group: root
     mode: 0755
   with_items:
-    - rulechains.sh
     - nginx.sh
+  tags:
+    - deploy    
+- name: Add rulechains runit template
+  template:
+    src: "{{ playbook_dir }}/templates/runit/rulechains.sh.j2"
+    dest: /etc/service/rulechains/run
+    mode: 0755
   tags:
     - deploy    
     
