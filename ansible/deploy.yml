@@ -62,7 +62,29 @@
     register: rc_result
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
     tags:
-      - deploy
+      - deploy      
+  - name: Copy over postgresql runit file
+    copy:
+      src: "{{ playbook_dir }}/files/runit/{{ item }}"
+      dest: "/etc/service/{{ item | splitext | first }}/run"
+      owner: root
+      group: root
+      mode: 0755
+    with_items:
+      - postgresql.sh
+    tags:
+      - deploy    
+  - name: Copy over postgresql log runit file
+    copy:
+      src: "{{ playbook_dir }}/files/runit/log/{{ item }}"
+      dest: "/etc/service/{{ item | splitext | first }}/log/run"
+      owner: root
+      group: root
+      mode: 0755
+    with_items:
+      - postgresql.log.sh
+    tags:
+      - deploy    
   when: "deploy_env != 'Production'"
 - name: install the latest updates
   package:
